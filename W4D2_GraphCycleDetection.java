@@ -29,8 +29,25 @@ public class W4D2_GraphCycleDetection {
     }
 
     private boolean hasCycleRecursive(String current, Set<String> visited, String parent) {
-        // TODO: Implement the has cycle recursive logic.
-        return null; // Placeholder - replace with your implementation
+
+        visited.add(current);
+        List<String> neighbours = adjacencyList.get(current);
+
+        if(neighbours != null){
+            for(String neighbour : neighbours){
+                if(!visited.contains(neighbour)){
+                    if(hasCycleRecursive(neighbour, visited, current)){
+                        return true;
+                    }
+                }
+                else if(!neighbour.equals(parent)){
+                    return true;
+                }
+            }
+        }
+        
+
+        return false; // Placeholder - replace with your implementation
     }
 
     // Helper method to display graph structure
